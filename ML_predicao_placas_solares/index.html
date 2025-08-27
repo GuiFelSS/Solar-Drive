@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste da API Flask</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            font-family: Arial, sans-serif;
+        }
+
+        .labels {
+            width: 50%;
+            padding: 20px;
+            border-right: 2px solid #ddd;
+        }
+
+        .sugestoes {
+            width: 40%;
+            padding: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            background: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="labels">
+        <h1>Teste da API Flask</h1>
+
+        <!-- Formulário para Previsão de Eficiência -->
+        <h2>Prever Eficiência</h2>
+        <form id="efficiencyForm">
+            <label>Temperatura Média: <input type="number" id="temp_mean" step="0.01" required></label>
+            <label>Umidade Média: <input type="number" id="humidity_mean" step="0.01" required></label>
+            <label>Velocidade do Vento Média: <input type="number" id="wind_speed_mean" step="0.01" required></label>
+            <label>Visibilidade Média: <input type="number" id="visibility_mean" step="0.01" required></label>
+            <label>Pressão Média: <input type="number" id="pressure_mean" step="0.01" required></label>
+            <button type="submit">Enviar</button>
+        </form>
+        <p id="efficiencyResult"></p>
+
+        <!-- Formulário para Identificar Cluster -->
+        <h2>Identificar Cluster</h2>
+        <form id="clusterForm">
+            <label>Temperatura Média: <input type="number" id="cluster_temp_mean" step="0.01" required></label>
+            <label>Umidade Média: <input type="number" id="cluster_humidity_mean" step="0.01" required></label>
+            <label>Velocidade do Vento Média: <input type="number" id="cluster_wind_speed_mean" step="0.01"
+                    required></label>
+            <label>Visibilidade Média: <input type="number" id="cluster_visibility_mean" step="0.01" required></label>
+            <label>Pressão Média: <input type="number" id="cluster_pressure_mean" step="0.01" required></label>
+            <button type="submit">Enviar</button>
+        </form>
+        <p id="clusterResult"></p>
+    </div>
+
+    <div class="sugestoes">
+        <h2>Sugestões</h2>
+
+        <p>Cluster 0 (Quente e Seco):<br>
+            "temperatura_media": 35.0,<br>
+            "umidade_media": 0.2,<br>
+            "velocidade_vento_media": 8.0,<br>
+            "visibilidade_media": 15.0,<br>
+            "pressao_media": 990.0</p>
+
+        <p>Cluster 1 (Intermediário):<br>
+            "temperatura_media": 25.0,<br>
+            "umidade_media": 0.5,<br>
+            "velocidade_vento_media": 12.0,<br>
+            "visibilidade_media": 12.0,<br>
+            "pressao_media": 1010.0</p>
+
+        <p>Cluster 2 (Frio e Úmido):<br>
+            "temperatura_media": 15.0,<br>
+            "umidade_media": 0.8,<br>
+            "velocidade_vento_media": 10.0,<br>
+            "visibilidade_media": 8.0,<br>
+            "pressao_media": 1005.0</p>
+    </div>
+
+    <script>
+        // URL base da API Flask
+        const API_URL = "http://127.0.0.1:5000";
+
+        // Função para enviar dados para o endpoint /prever-eficiencia
+        document.getElementById("efficiencyForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const data = {
+                temperatura_media: parseFloat(document.getElementById("temp_mean").value),
+                umidade_media: parseFloat(document.getElementById("humidity_mean").value),
+                velocidade_vento_media: parseFloat(document.getElementById("wind_speed_mean").value),
+                visibilidade_media: parseFloat(document.getElementById("visibility_mean").value),
+                pressao_media: parseFloat(document.getElementById("pressure_mean").value)
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/prever-eficiencia`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                document.getElementById("efficiencyResult").innerText = result.sucesso
+                    ? `Previsão: ${result.previsao_eficiencia}`
+                    : `Erro: ${result.erro}`;
+            } catch (error) {
+                document.getElementById("efficiencyResult").innerText = `Erro: ${error}`;
+            }
+        });
+
+        // Função para enviar dados para o endpoint /identificar-cluster
+        document.getElementById("clusterForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const data = {
+                temperatura_media: parseFloat(document.getElementById("cluster_temp_mean").value),
+                umidade_media: parseFloat(document.getElementById("cluster_humidity_mean").value),
+                velocidade_vento_media: parseFloat(document.getElementById("cluster_wind_speed_mean").value),
+                visibilidade_media: parseFloat(document.getElementById("cluster_visibility_mean").value),
+                pressao_media: parseFloat(document.getElementById("cluster_pressure_mean").value)
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/identificar-cluster`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                document.getElementById("clusterResult").innerText = result.sucesso
+                    ? `Cluster: ${result.cluster} - ${result.descricao}`
+                    : `Erro: ${result.erro}`;
+            } catch (error) {
+                document.getElementById("clusterResult").innerText = `Erro: ${error}`;
+            }
+        });
+    </script>
+</body>
+
+</html>
