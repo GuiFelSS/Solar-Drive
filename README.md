@@ -54,7 +54,7 @@ Essa abordagem não apenas aumenta a eficiência energética dos carros elétric
 # Redes
 
 - **Guilherme Felipe**
-  - [**Portifólio**]() | [**LinkedIn**](https://www.linkedin.com/in/guilherme-felipe-da-silva-souza/) | [**GitHub**](https://github.com/GuiFelSS)
+  - [**Portifólio**](https://guifelssportifolio.vercel.app/) | [**LinkedIn**](https://www.linkedin.com/in/guilherme-felipe-da-silva-souza/) | [**GitHub**](https://github.com/GuiFelSS)
 - **Juan Pablo**
   - [**LinkedIn**](https://www.linkedin.com/in/juanpabloruiz12/) | [**GitHub**](https://github.com/JuanPabloRuiz583)
 - **Natasha Lopes**
