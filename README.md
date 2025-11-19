@@ -43,11 +43,9 @@ Essa abordagem não apenas aumenta a eficiência energética dos carros elétric
 - **Guilherme Felipe**
   - Responsável pelo **Machine Learning de predição energetica e condiçôes**.
   - **Link para o Repositório:** este mesmo repositório na pasta `ML_predicao_placas_solares`
-- **Natasha Lopes**
   - Responsável pelo **Front-end**.
-  - **Link para o Repositório:** [https://github.com/Natashalopees1/global-solution-2.git](https://github.com/Natashalopees1/global-solution-2.git)
   - **Deploy:** [https://global-solution-2-oau6.vercel.app/](https://global-solution-2-oau6.vercel.app/)
-- **Juan Pablo**
+- **Juan Pablo** **Natasha Lopes**
   - Responsável pelo **Back-end**.
   - **Link para o Repositório:** [https://github.com/JuanPabloRuiz583/Gs_java_semestre2](https://github.com/JuanPabloRuiz583/Gs_java_semestre2)
 
